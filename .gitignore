@@ -50,7 +50,6 @@ mitsuba.*.log
 .settings
 .cproject
 .project
-/scene*
 /final_project*
 /olds
 /trash
