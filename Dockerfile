@@ -1,13 +1,11 @@
-FROM ubuntu:22.04
-# FROM ubuntu:14.04
-
-# ARG COMPILER_VERSION=12.3
-# gcc-${COMPILER_VERSION} \
-# g++-${COMPILER_VERSION}\
-# gfortran-${COMPILER_VERSION}\
+FROM ubuntu:20.04
 
 # make installation non-interactive, so it doesn't ask for timezone and stuff
 ENV DEBIAN_FRONTEND=noninteractive
+
+# # Ensure Python 2.7 is the default
+# RUN apt-get update && apt-get install -y python2-dev
+# RUN ln -sf /usr/local/bin/python2 /usr/bin/python
 
 # install dependences for Mitsuba 0.6.0
 RUN apt-get update && apt-get install -y \
@@ -29,12 +27,40 @@ RUN apt-get update && apt-get install -y \
    libxxf86vm-dev \
    libpcrecpp0v5 \
    libeigen3-dev \
-   libeigen3-dev \
    libfftw3-dev \
    libcollada-dom-dev \
+   python2-dev \
    && rm -rf /var/lib/apt/lists/*
 
-############# NEEDED WHEN UBUNTU=14.04 ############# 
+# run  apt-get update && apt-get install -y python2-dev in the container once its up
+
+# RUN apt-get update && apt-get install -y python2-dev && \
+# ln -s /usr/bin/python2 /usr/bin/python && \
+# apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# make sure numpy is installed
+# RUN pip install numpy
+
+# Set working directory
+WORKDIR /
+
+COPY . /MitsubaDopplerToF
+
+CMD ["bash"]
+
+
+
+
+
+
+############# NEEDED FROM WHEN UBUNTU=14.04 ############# 
+# FROM ubuntu:14.04
+
+# ARG COMPILER_VERSION=12.3
+# gcc-${COMPILER_VERSION} \
+# g++-${COMPILER_VERSION}\
+# gfortran-${COMPILER_VERSION}\
+
 # RUN wget --no-check-certificate https://www.mitsuba-renderer.org/releases/current/trusty/collada-dom_2.4.0-1_amd64.deb \
 #    && dpkg -i collada-dom_2.4.0-1_amd64.deb
 
@@ -56,15 +82,7 @@ RUN apt-get update && apt-get install -y \
 #     && sudo ln -s ./Qt5Sql.pc ./QtSql.pc \
 #     && sudo ln -s ./Qt5Test.pc ./QtTest.pc 
 
-# Set Python2 as the default
-RUN ln -sf /usr/bin/python2.7 /usr/bin/python
-
-# Set working directory
-WORKDIR /
-
 # clone mitsuba from github, compile and source
-RUN git clone https://github.com/sarahkfriday/MitsubaDopplerToF.git \
-    && cd MitsubaDopplerToF \
-    && git pull 
-
-CMD ["bash"]
+# RUN git clone https://github.com/sarahkfriday/MitsubaDopplerToF.git \
+#     && cd MitsubaDopplerToF \
+#     && git pull 

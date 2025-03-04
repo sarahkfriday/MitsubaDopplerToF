@@ -22,10 +22,10 @@
 		<sampler type="independent">
 			<integer name="sampleCount" value="512" />
 		</sampler>
-		<film type="mfilm">
+		<film type="hdr">
 			<integer name="width" value="256" />
 			<integer name="height" value="256" />
-			<string name="fileFormat" value="numpy" />
+			<!-- <string name="fileFormat" value="numpy" /> -->
 			<string name="pixelFormat" value="rgb" />
 			<rfilter type="tent" />
 		</film>
