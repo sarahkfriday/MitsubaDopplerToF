@@ -32,14 +32,15 @@ RUN apt-get update && apt-get install -y \
    python2-dev \
    && rm -rf /var/lib/apt/lists/*
 
-# run  apt-get update && apt-get install -y python2-dev in the container once its up
+RUN ln -s /usr/bin/python2 /usr/bin/python
 
-# RUN apt-get update && apt-get install -y python2-dev && \
-# ln -s /usr/bin/python2 /usr/bin/python && \
-# apt-get clean && rm -rf /var/lib/apt/lists/*
+# Download and install pip for Python 2.7
+RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && \
+    python get-pip.py && \
+    rm get-pip.py
 
-# make sure numpy is installed
-# RUN pip install numpy
+# Install the last compatible version of NumPy for Python 2.7
+RUN pip install numpy==1.16.6
 
 # Set working directory
 WORKDIR /
