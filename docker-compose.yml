@@ -5,6 +5,6 @@ services:
     platform: linux/amd64
     volumes:
       - ./scenes:/MitsubaDopplerToF/scenes
-      - ./results:/MitsubaDopplerToF/result
+      - ./results:/MitsubaDopplerToF/results
       - ./build/release:/MitsubaDopplerToF/build/release
     command: sleep infinity
