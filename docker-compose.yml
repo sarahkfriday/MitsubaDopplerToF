@@ -1,0 +1,9 @@
+services:
+  mitsuba:
+    build: .
+    container_name: mitsuba-doppler
+    platform: linux/amd64
+    volumes:
+      - ./mitsuba:/mitsuba
+    command:
+      bash -c "cd MitsubaDopplerToF && source setpath.sh"
