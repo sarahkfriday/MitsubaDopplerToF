@@ -1,0 +1,16 @@
+Server: 
+
+- sudo access to make sure all of the correct packages were added
+- copy config file that i want to build folder, rename it config.py
+- conda install scons (even if it is in usr/bin)
+- delete the build/release folder
+
+04/30/25:
+I think it can't find these packages:
+
+ -lfftw3_threads -lfftw3 -ljpeg -lpng -lHalf -lIlmImf -lz -lboost_system -lboost_filesystem -lboost_thread -ldl -lm -lpthread -lgomp
+/usr/bin/ld: cannot find -lHalf: No such file or directory
+/usr/bin/ld: cannot find -lIlmImf: No such file or directory
+collect2: error: ld returned 1 exit status
+scons: *** [build/release/libcore/libmitsuba-core.so] Error 1
+scons: building terminated because of errors.
