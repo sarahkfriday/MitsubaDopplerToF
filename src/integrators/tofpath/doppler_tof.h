@@ -40,7 +40,7 @@ public:
             m_wave_function_type = WAVE_TYPE_TRAPEZOIDAL;
         }
         
-        m_low_srequency_component_only = props.getBoolean("low_srequency_component_only", true);
+        m_low_frequency_component_only = props.getBoolean("low_srequency_component_only", true);
         m_force_constant_attenuation = props.getBoolean("force_constant_attenuation", false);
         m_primal_antithetic_mis_power = props.getFloat("primal_antithetic_mis_power", 1.0f);
     };
@@ -67,9 +67,9 @@ public:
         Float w_d = 2 * M_PI * (m_sensor_modulation_frequency_mhz - m_illumination_modulation_frequency_mhz) * 1e6;
         Float phi = (2 * M_PI * m_illumination_modulation_frequency_mhz) / 300 * path_length;
 
-        if(m_low_srequency_component_only){
+        if(m_low_frequency_component_only){
             Float t = w_d * ray_time + m_sensor_modulation_phase_offset + phi;
-            Float sg_t = 0.5 * m_illumination_modulation_scale * evalModulationFunctionValueLowPass(m_wave_function_type, t);
+            Float sg_t = 0.5 * evalModulationFunctionValueLowPass(m_wave_function_type, t);
             return sg_t;
         } 
         
@@ -183,7 +183,7 @@ protected:
     Float m_sensor_modulation_phase_offset;
     Float m_time;
     
-    bool m_low_srequency_component_only;
+    bool m_low_frequency_component_only;
     bool m_force_constant_attenuation;
     float m_primal_antithetic_mis_power;
 
